@@ -162,7 +162,7 @@
                         </svg>
 
                     </button>
-                    
+
                     <div class="menuPrimary mt-8 justify-content-between d-flex align-items-center h-50px w-100">
                         <!-- Header Logo -->
                         <div class="logo-main d-flex align-items-center ">
@@ -173,55 +173,61 @@
                                 @if ($header_logo != null)
                                     <!-- <img src="{{ uploaded_asset($header_logo) }}" alt="{{ env('APP_NAME') }}"
                                         class="mw-50 h-30px h-md-40px logo" height="50"> -->
-                                        <img src="{{ uploaded_asset($header_logo) }}" alt="{{ env('APP_NAME') }}"
+                                    <img src="{{ uploaded_asset($header_logo) }}" alt="{{ env('APP_NAME') }}"
                                         class="mw-50 w-50px logo" height="50">
                                 @else
                                     <!-- <img src="{{ static_asset('assets/img/logo.png') }}" alt="{{ env('APP_NAME') }}"
                                         class="mw-50 h-30px h-md-40px logo" height="50"> -->
-                                        <img src="{{ static_asset('assets/img/logo.png') }}" alt="{{ env('APP_NAME') }}"
+                                    <img src="{{ static_asset('assets/img/logo.png') }}" alt="{{ env('APP_NAME') }}"
                                         class="mw-50 w-50px logo" height="50">
-                                        @endif
+                                @endif
                             </a>
                             <h2 class="logo-main--text">Thú cưng</h2>
                         </div>
 
                         <div class="d-none d-lg-block position-relative bg-primary h-40px" style="border-radius:8px;">
-                                   
-                                        <!-- Categoty Menu Button -->
-                                            <div class="d-none d-xl-block all-category has-transition bg-black-10" id="category-menu-bar">
-                                            
-                                                    <div class="category-header--button d-flex  align-items-center hover:cursor-pointer ">
-                                                        <img class="category-header--icon" src="{{ static_asset('assets/img/danhmucicon.svg') }}" alt="" />
-                                                           <span class="fw-700 fs-14 text-white" style="padding-top:2px;">{{ translate('Categories') }}</span>
-                                                            <!-- <a href="{{ route('categories.all') }}" class="text-reset"> -->
-                                                                <!-- <span class="d-none d-lg-inline-block text-white hov-opacity-80">({{ translate('See All') }})</span> -->
-                                                                    
-                                                            <!-- </a> -->
-                                                        
-                                                        <!-- <i class="las la-angle-down text-white has-transition" id="category-menu-bar-icon"
-                                                            style="font-size: 1.2rem !important"></i> -->
-                                                    </div>
-                                                
-                                            </div>
-                                            <!-- Categoty Menus -->
-                                            <div class="hover-category-menu position-absolute w-100 top-100 left-0 right-0 z-3 d-none"
-                                                id="click-category-menu">
-                                                <!-- <div class="container"> -->
-                                                    <div class="d-flex position-relative">
-                                                        <div class="position-static">
-                                                            @include('frontend.'.get_setting("homepage_select").'.partials.category_menu')
-                                                        </div>
-                                                    </div>
-                                                <!-- </div> -->
-                                            </div>  
-                                   
 
-                               
-            
+                            <!-- Categoty Menu Button -->
+                            <div class="d-none d-xl-block all-category has-transition bg-black-10"
+                                id="category-menu-bar">
+
+                                <div class="category-header--button d-flex  align-items-center hover:cursor-pointer ">
+                                    <img class="category-header--icon"
+                                        src="{{ static_asset('assets/img/danhmucicon.svg') }}" alt="" />
+                                    <span class="fw-700 fs-14 text-white"
+                                        style="padding-top:2px;">{{ translate('Danh mục') }}</span>
+                                    <!-- <a href="{{ route('categories.all') }}" class="text-reset"> -->
+                                    <!-- <span class="d-none d-lg-inline-block text-white hov-opacity-80">({{ translate('See All') }})</span> -->
+
+                                    <!-- </a> -->
+
+                                    <!-- <i class="las la-angle-down text-white has-transition" id="category-menu-bar-icon"
+                                                            style="font-size: 1.2rem !important"></i> -->
+                                </div>
+
+                            </div>
+                            <!-- Category Menus -->
+                            <div class="hover-category-menu position-absolute w-100 top-100 left-0 right-0 z-3 d-none"
+                                id="click-category-menu">
+                                <!-- <div class="container"> -->
+                                <div class="d-flex position-relative">
+                                    <div class="position-static">
+                                        @include(
+                                            'frontend.' .
+                                                get_setting('homepage_select') .
+                                                '.partials.category_menu')
+                                    </div>
+                                </div>
+                                <!-- </div> -->
+                            </div>
+
+
+
+
                         </div>
-                
-             
-                        
+
+
+
                         <!-- Search Icon for small device -->
                         <div class="d-lg-none ml-auto mr-0">
                             <a class="p-2 d-block text-reset" href="javascript:void(0);" data-toggle="class-toggle"
@@ -288,45 +294,41 @@
                                 </a>
                             </div>
                         </div>
-                        <!-- Compare -->
-                        <!-- <div class="d-none d-lg-block ml-3 mr-0">
+                        {{-- <div class="d-none d-lg-block ml-3 mr-0">
                             <div class="" id="compare">
                                 @include('frontend.' . get_setting('homepage_select') . '.partials.compare')
                             </div>
-                        </div> -->
-                        <!-- Wishlist -->
-                        <!-- <div class="d-none d-lg-block mr-3" style="margin-left: 36px;">
+                        </div>
+                        <div class="d-none d-lg-block mr-3" style="margin-left: 36px;">
                             <div class="" id="wishlist">
                                 @include('frontend.' . get_setting('homepage_select') . '.partials.wishlist')
                             </div>
-                        </div> -->
-                       
-                        <div class="trackingOrder menuRightHeader d-flex flex-column justify-content-center align-items-center">
-                            <img class="iconNavRight" src="{{ static_asset('assets/img/iconDonHang.svg') }}" alt="">
+                        </div> --}}
+
+                        <a href="{{ route('purchase_history.index') }}"
+                            class="trackingOrder menuRightHeader d-flex flex-column justify-content-center align-items-center">
+                            <img class="iconNavRight" src="{{ static_asset('assets/img/iconDonHang.svg') }}"
+                                alt="">
                             <span class="textNavRight">Đơn hàng</span>
-                        </div>
+                        </a>
                         @if (!isAdmin())
                             <!-- Notifications -->
                             <ul class="list-inline mb-0 h-100 d-none d-xl-flex justify-content-end align-items-center">
                                 <li class="list-inline-item  pl-0 dropdown">
-                                    <a class="menuRightHeader dropdown-toggle no-arrow  d-flex flex-column justify-content-center align-items-center" data-toggle="dropdown"
-                                        href="javascript:void(0);" role="button" aria-haspopup="false"
-                                        aria-expanded="false">
-                                        
-                                            <span class="position-relative d-inline-block">
-                                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="14.668" height="16"
-                                                    viewBox="0 0 14.668 16">
-                                                    <path id="_26._Notification" data-name="26. Notification"
-                                                        d="M8.333,16A3.34,3.34,0,0,0,11,14.667H5.666A3.34,3.34,0,0,0,8.333,16ZM15.06,9.78a2.457,2.457,0,0,1-.727-1.747V6a6,6,0,1,0-12,0V8.033A2.457,2.457,0,0,1,1.606,9.78,2.083,2.083,0,0,0,3.08,13.333H13.586A2.083,2.083,0,0,0,15.06,9.78Z"
-                                                        transform="translate(-0.999)" fill="#91919b" />
-                                                </svg> -->
-                                                <img src="{{ static_asset('assets/img/iconThongBao.svg') }}" alt="">
-                                                @if (Auth::check() && count($user->unreadNotifications) > 0)
-                                                    <span
-                                                        class="badge badge-primary badge-inline badge-pill absolute-top-right--10px">{{ count($user->unreadNotifications) }}</span>
-                                                @endif
-                                            </span>
-                                            <span class="textNavRight">Thông báo</span>
+                                    <a class="menuRightHeader dropdown-toggle no-arrow  d-flex flex-column justify-content-center align-items-center"
+                                        data-toggle="dropdown" href="javascript:void(0);" role="button"
+                                        aria-haspopup="false" aria-expanded="false">
+
+                                        <span class="position-relative d-inline-block">
+
+                                            <img src="{{ static_asset('assets/img/iconThongBao.svg') }}"
+                                                alt="">
+                                            @if (Auth::check() && count($user->unreadNotifications) > 0)
+                                                <span
+                                                    class="badge badge-primary badge-inline badge-pill absolute-top-right--10px">{{ count($user->unreadNotifications) }}</span>
+                                            @endif
+                                        </span>
+                                        <span class="textNavRight">Thông báo</span>
                                     </a>
 
                                     @auth
@@ -369,6 +371,7 @@
                                                     @endforelse
                                                 </ul>
                                             </div>
+
                                             <div class="text-center border-top">
                                                 <a href="{{ route('all-notifications') }}"
                                                     class="text-secondary fs-12 d-block py-2">
@@ -381,16 +384,24 @@
                             </ul>
                         @endif
 
-                        <div class="d-none d-xl-block ml-auto mr-0">
+                    
+                        <!-- Cart -->
+                        <div class="d-none d-xl-block  mr-0 has-transition mb-1 ml-2" data-hover="dropdown">
+                            <div class="nav-cart-box dropdown h-100" id="cart_items" style="width: max-content;">
+                                @include('frontend.' . get_setting('homepage_select') . '.partials.cart')
+                            </div>
+                        </div>
+                        <div class="d-none d-xl-block ml-auto">
                             @auth
                                 <span
-                                    class="d-flex align-items-center nav-user-info py-20px @if (isAdmin()) ml-5 @endif"
+                                    class="d-flex flex-column align-items-center justify-content-center nav-user-info py-20px @if (isAdmin()) ml-5 @endif"
                                     id="nav-user-info">
                                     <!-- Image -->
                                     <span
-                                        class="size-40px rounded-circle overflow-hidden border border-transparent nav-user-img">
+                                        class="size-30px rounded-circle overflow-hidden border border-transparent nav-user-img">
                                         @if ($user->avatar_original != null)
                                             <img src="{{ $user_avatar }}" class="img-fit h-100"
+                                                style="object-fit:cover;object-position:center; "
                                                 alt="{{ translate('avatar') }}"
                                                 onerror="this.onerror=null;this.src='{{ static_asset('assets/img/avatar-place.png') }}';">
                                         @else
@@ -400,37 +411,36 @@
                                         @endif
                                     </span>
                                     <!-- Name -->
-                                    <h4 class="h5 fs-14 fw-700 text-dark ml-2 mb-0">{{ $user->name }}</h4>
+                                    <h4 class="h5 fs-12 fw-700 text-dark ml-2 mb-0">{{ $user->name }}</h4>
                                 </span>
                             @else
                                 <!--Login & Registration -->
-                                <span class="menuRightHeader d-flex flex-column justify-content-center align-items-center nav-user-info">
+                                <a href="{{ route('user.login') }}">
+                            
+                            
+                                <span
+                                    class="menuRightHeader d-flex flex-column justify-content-center align-items-center nav-user-info">
                                     <!-- Image -->
                                     <span
                                         class="size-20px iconNavRight rounded-circle overflow-hidden  d-flex align-items-center justify-content-center nav-user-img">
                                         <!-- <svg xmlns="http://www.w3.org/2000/svg" width="19.902" height="20.012"
-                                            viewBox="0 0 19.902 20.012">
-                                            <path id="fe2df171891038b33e9624c27e96e367"
-                                                d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1.006,1.006,0,1,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1,10,10,0,0,0-6.25-8.19ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z"
-                                                transform="translate(-2.064 -1.995)" fill="#91919b" />
-                                        </svg> -->
-                                        <img id="fe2df171891038b33e9624c27e96e367" src="{{ static_asset('assets/img/iconTaiKhoan.png') }}" alt="">
+                                                viewBox="0 0 19.902 20.012">
+                                                <path id="fe2df171891038b33e9624c27e96e367"
+                                                    d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1.006,1.006,0,1,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1,10,10,0,0,0-6.25-8.19ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z"
+                                                    transform="translate(-2.064 -1.995)" fill="#91919b" />
+                                            </svg> -->
+                                        <img id="fe2df171891038b33e9624c27e96e367"
+                                            src="{{ static_asset('assets/img/iconTaiKhoan.png') }}" alt="">
                                     </span>
                                     <span class="textNavRight">Tài khoản</span>
 
                                     <!-- <a href="{{ route('user.login') }}"
-                                        class="text-reset opacity-60 hov-opacity-100 hov-text-primary fs-12 d-inline-block border-right border-soft-light border-width-2 pr-2 ml-3">{{ translate('Login') }}</a>
-                                    <a href="{{ route('user.registration') }}"
-                                        class="text-reset opacity-60 hov-opacity-100 hov-text-primary fs-12 d-inline-block py-2 pl-2">{{ translate('Registration') }}</a> -->
+                                            class="text-reset opacity-60 hov-opacity-100 hov-text-primary fs-12 d-inline-block border-right border-soft-light border-width-2 pr-2 ml-3">{{ translate('Login') }}</a> -->
+                                        <!-- <a href="{{ route('user.registration') }}"
+                                            class="text-reset opacity-60 hov-opacity-100 hov-text-primary fs-12 d-inline-block py-2 pl-2">{{ translate('Registration') }}</a> -->
                                 </span>
+                                </a>
                             @endauth
-                        </div>
-                        <!-- Cart -->
-                        <div class="d-none d-xl-block  mr-0 has-transition"
-                            data-hover="dropdown">
-                            <div class="nav-cart-box dropdown h-100" id="cart_items" style="width: max-content;">
-                                @include('frontend.'.get_setting('homepage_select').'.partials.cart')
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -636,8 +646,8 @@
             <div class="container h-100">
                 <div class="d-flex h-100">
                     <!-- <div class="d-flex h-100"> -->
-                        <!-- Categoty Menu Button -->
-                            <!-- <div class="d-none d-xl-block all-category has-transition bg-black-10" id="category-menu-bar">
+                    <!-- Categoty Menu Button -->
+                    <!-- <div class="d-none d-xl-block all-category has-transition bg-black-10" id="category-menu-bar">
                                 <div class="px-3 h-100"
                                     style="padding-top: 12px;padding-bottom: 12px; width:270px; cursor: pointer;">
                                     <div class="d-flex align-items-center justify-content-between">
@@ -653,21 +663,28 @@
                                     </div>
                                 </div>
                             </div> -->
-                            <!-- Categoty Menus -->
-                            <!-- <div class="hover-category-menu position-absolute w-100 top-100 left-0 right-0 z-3 d-none"
+                    <!-- Categoty Menus -->
+                    <!-- <div class="hover-category-menu position-absolute w-100 top-100 left-0 right-0 z-3 d-none"
                                 id="click-category-menu">
                                 <div class="container">
                                     <div class="d-flex position-relative">
                                         <div class="position-static">
-                                            @include('frontend.'.get_setting("homepage_select").'.partials.category_menu')
+                                            @include(
+                                                'frontend.' .
+                                                    get_setting('homepage_select') .
+                                                    '.partials.category_menu')
                                         </div>
                                     </div>
                                 </div>
                             </div>   -->
-                     <!-- </div> -->
+                    <!-- </div> -->
                     <!-- Header Menus -->
                     @php
-                        $nav_txt_color = ((get_setting('header_nav_menu_text') == 'light') ||  (get_setting('header_nav_menu_text') == null)) ? 'text-dark' : 'text-white';
+                        $nav_txt_color =
+                            get_setting('header_nav_menu_text') == 'light' ||
+                            get_setting('header_nav_menu_text') == null
+                                ? 'text-dark'
+                                : 'text-white';
                     @endphp
                     <div class="ml-xl-4 w-100 overflow-hidden">
                         <div class="d-flex align-items-center justify-content-center justify-content-xl-start h-100">
@@ -686,10 +703,10 @@
                             </ul>
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
-            
+
         </div>
     </header>
 

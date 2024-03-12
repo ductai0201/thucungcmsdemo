@@ -54,6 +54,8 @@ use App\Http\Controllers\CommissionController;
 use AizPackages\ColorCodeConverter\Services\ColorCodeConverter;
 use App\Models\FlashDealProduct;
 use App\Models\UserCoupon;
+use App\Models\Review;
+
 
 //sensSMS function for OTP
 if (!function_exists('sendSMS')) {
@@ -2499,5 +2501,42 @@ if (!function_exists('timezones')) {
             '(GMT+12:00) Wellington' => 'Pacific/Auckland',
             '(GMT+13:00) Nuku\'alofa' => 'Pacific/Tongatapu'
         );
+    }
+}
+
+
+
+
+//avg start rating by product id
+if (!function_exists('avg_start_rating')) {
+    function avg_start_rating($product_id)
+    {
+        $avg = Review::where('product_id', $product_id)->avg('rating');
+        return $avg;
+    }
+}
+
+// count review by product id
+if (!function_exists('count_review')) {
+    function count_review($product_id)
+    {
+        $count = Review::where('product_id', $product_id)->count();
+        return $count;
+    }
+}
+//get all products
+if(!function_exists('get_all_products')){
+    function get_all_products(){
+        $product_query = Product::query();
+        return $product_query->isApprovedPublished()->orderBy('created_at', 'desc')->limit(15)->get();
+    }
+}
+
+//get one new product
+if (!function_exists('get_todays_product')) {
+    function get_todays_product()
+    {
+        $product_query = Product::query();
+        return $product_query->where('published', 1)->orderBy('created_at', 'desc')->first();
     }
 }
