@@ -1,0 +1,282 @@
+/*your custom css goes here*/ 
+
+
+@import url('https://fonts.googleapis.com/css2?family=Helvetica&display=swap');
+
+@font-face {
+    font-family: 'ThuCung';
+    src: url('/public/assets/fonts/ThuCung-Font.ttf');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+:root {
+    --primary-color: #e30613;
+    --second-color: #313131;
+    --three-color: #5b5b5b;
+    --four-color: #ffffff;
+    --five-color: #a9a9a9;
+    --six-color: #f0f0f0;
+    --seven: #f9f9f9;
+    --eight: #00C97C;
+    --nine: #FDE8E8;
+    --ten: #EEE9E9;
+    --eleven: #ff202b79;
+    --twelve: #e0e6ef;
+    --thirteen: #f1f3f5;
+    --fourteen: #e53e3e;
+    --fifteen: #e6e8eb;
+    --sixteen: #6f56d3;
+    --seventeen: #5335cb;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDownFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.serviceTop--left{
+    gap:16px;
+}
+.choose-location--header{
+    gap:6px;
+}
+.choose-location-text{
+    color:var(--second-color)
+
+}
+.chooseLocationDeliveryText{
+    color:var(--primary-color)
+}
+.serviceTop--menu {
+    gap:16px;
+}
+li{
+    list-style: none;
+}
+.serviceTop--menu li a {
+    color: var(--three-color);
+    font-size: 14px;
+
+  }
+
+  .serviceTop--menu li a:active,
+  .serviceTop--menu li a:focus {
+    color: var(--primary-color);
+  }
+
+  .serviceTop--menu li:hover a {
+    color: var(--primary-color)
+  }
+
+  .category-header--button{
+    gap:3px;
+    padding: 0 14px;
+    height: 40px;
+    min-width: 120px;
+    min-height: 40px;
+
+  }
+
+  .logo-main--text {
+    color: var(--primary-color);
+    font-family: 'ThuCung';
+    font-size: 30px;
+    letter-spacing: -0.3px;
+    font-weight: 900;
+    margin-bottom: 0;
+  }
+  .logo-main{
+    margin-right: 15px;
+  }
+  .category-header--button:hover{
+    cursor: pointer;
+  }
+  .front-header-search{
+    margin:0 15px;
+  }
+  .iconNavRight{
+    width: 20px;
+    height: 20px;
+  }
+  .textNavRight{
+    font-size: 14px;
+    color:black;
+  }
+  .menuRightHeader{
+    gap:4px;
+    margin-right: 16px;
+  }
+  .productOneDay{
+    gap:24px;
+  }
+  .product-card-ads{
+    gap:20px;
+  }
+  .price-and-cart{
+    margin-bottom: 8px;
+  }
+  .price-info{
+    gap:12px;
+  }
+  .product-rating{
+    margin-bottom: 8px;
+  }
+  .rating-count{
+    margin-left: 1px;
+  }
+  .numberReviews{
+    margin-left: 12px;
+    gap: 4px;
+  }
+  .product-title{
+    margin-bottom: 8px;
+  }
+  .cart-icon{
+    gap:12px;
+    
+  }
+
+  .product-title:hover{
+    color:var(--primary-color);
+    cursor: pointer;
+  }
+
+  .cart-icon:hover{
+    background-color: var(--fourteen);
+  }
+  .cart-icon{
+    background-color: var(--primary-color);
+      padding: 7px;
+      border-radius: 5px;
+  }
+  .cart-icon img{
+    filter: brightness(0) invert(1);
+  } 
+
+  .product__card-title {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.rating-count {
+    font-size: 12px;
+    color: #000000;
+    font-weight: 500;
+}
+
+.numberReviews {
+    font-size: 12px;
+    color: #000000;
+    font-weight: 400;
+}
+.old-price {
+    color: #000000;
+    font-size: 12px;
+    font-weight: 400;
+    
+}
+.text-decoration-line-through{
+    text-decoration: line-through;
+    font-size: 12px;
+    font-weight: 500;
+
+}
+.product__card-content .new-price{
+    font-size: 16px;
+    font-weight: 600;
+    color: #e30613;;
+}
+.btn__add-to-cart {
+    background-color: #e30613;
+    color: #fff;
+    border-radius: 5px;
+    width: 72px;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.btn__add-to-cart img{
+    filter: invert(1);
+    width: 24px;
+    height: 24px;
+}
+.product__badge{
+    background-color: #e30613;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 3px 8px;
+    text-align: center;
+}
+.featured__product-card{
+  border-right: 1px solid var(--fifteen);
+}
+.container-bannerSlideAds{
+  margin-top: 32px;
+  gap: 32px;
+  max-height: 280px;
+  height: 280px;
+}
+
+.productOneDay{
+  gap:24px;
+}
+.productOneDay h2{
+  font-size: 20px;
+}
+.home-slider{
+  padding: 0 !important;;
+}
+
+.payMoneyAdsProduct{
+  padding: 0 !important;;
+}
+.swiper-button-next, .swiper-button-prev{
+  width: 20px;
+  height: 20px;
+}
+.bannerSliderPrimary{
+  width: 934px;
+  height: 280px;
+}
