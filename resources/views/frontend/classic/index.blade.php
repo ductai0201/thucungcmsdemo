@@ -1,7 +1,14 @@
 @extends('frontend.layouts.app')
 @php
-            $cart_added = [];
-        @endphp
+    $cart_added = [];
+    $decoded_slider_images = json_decode(get_setting('home_slider_images', null, $lang), true);
+    $sliders = get_slider_images($decoded_slider_images);
+    $home_slider_links = get_setting('home_slider_links', null, $lang);
+    $top_brands = json_decode(get_setting('top_brands'));
+    $brands = get_brands($top_brands);
+
+                                        
+@endphp
 @section('content')
     <style>
         @media (max-width: 767px){
@@ -10,40 +17,38 @@
             }
         }
     </style>
+   
     @php $lang = get_system_language()->code;  @endphp
     <!-- Sliders -->
     <div class="container">
         <!-- Sliders -->
                 <div class="home-banner-area mb-3" style="">
                     <div class="container">
-                        <div class="row d-flex flex-nowrap">
+                        <div class="row d-flex flex-nowrap h-280px mt-4">
                             <!-- Sliders -->
                                 @if (get_setting('home_slider_images', null, $lang) != null)
-                                        @php
-                                            $decoded_slider_images = json_decode(get_setting('home_slider_images', null, $lang), true);
-                                            $sliders = get_slider_images($decoded_slider_images);
-                                            $home_slider_links = get_setting('home_slider_links', null, $lang);
-                                        @endphp
-                                    
-                                        <swiper-container class="mySwiper col-8" pagination="true" pagination-clickable="true" navigation="true"
+                                        <!-- <swiper-container class="mySwiper col-8" pagination="true" pagination-clickable="true" navigation="true"
                                             space-between="30" centered-slides="true" autoplay-delay="2500"
-                                            autoplay-disable-on-interaction="false">
-                                            @foreach ($sliders as $key => $slider)
-                                                <swiper-slide>
-                                                    <img class="sliderBannerPrimary d-block rounded-xl mw-100 img-fit h-290px"
+                                            autoplay-disable-on-interaction="false"> -->
+                                            <div class="banner-main-slider col-8 w-100">
+                                                    @foreach ($sliders as $key => $slider)
+                                                        <!-- <swiper-slide> -->
+                                                    <img class="sliderBannerPrimary d-block rounded-xl mw-100 w-100 img-fit h-280px"
                                                     src="{{ $slider ? my_asset($slider->file_name) : static_asset('assets/img/placeholder.jpg') }}"
                                                     alt="{{ env('APP_NAME') }} promo"
                                                     onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';">
-                                                    </swiper-slide>
-                                            @endforeach
-                                        </swiper-container>
+                                                    
+                                                    <!-- </swiper-slide> -->
+                                                    @endforeach
+                                            </div> 
+                                        <!-- </swiper-container> -->
                                 @endif
                                <!-- One day product -->
                     @php $oneday_product = get_todays_product(); @endphp
-                    <div class="payMoneyAdsProduct col-4 px-4 py-5 d-flex flex-column ">
+                    <div class="payMoneyAdsProduct col-4  d-flex flex-column align-items-center justify-content-center">
                         <div class="productOneDay d-flex align-items-center justify-content-between">
-                            <h2 class="font-weight-bold fs-18">Sản phẩm trong ngày</h2>
-                            <span class="font-weight-bold inline-block">    
+                            <h2 class="font-weight-bold fs-20">Sản phẩm trong ngày</h2>
+                            <span class="font-weight-bold inline-block fs-16">    
                                 {{ date('H:i d/m/Y', strtotime($oneday_product->created_at)) }}
                             </span>
                         </div>
@@ -56,7 +61,7 @@
                             <div class="col-6 px-0 d-flex flex-column" style="gap:10px;">
                                 <div class="product__oneday-price d-flex align-items-center">
                                     <span class="fw-700 fs-20 text-primary">
-                                        {{ home_base_price($oneday_product) }}
+                                        {{ number_format( $oneday_product->unit_price,0, ',', '.') ; }}
                                     </span>
                                     <span
                                         class="fw-500 text-gray-dark fs-11 ml-2 text-decoration-line-through">
@@ -89,7 +94,7 @@
 
                                 <a @if (in_array($oneday_product->id, $cart_added)) active @endif" href="javascript:void(0)"
                                     @if (Auth::check()) onclick="showAddToCartModal({{ $oneday_product->id }})" @else onclick="showLoginModal()" @endif>
-                                <button class="btn__add-to-cart fs-12 btn w-100 bg-primary" style="white-space:nowrap">
+                                <button class="btn__add-to-cart fs-12 btn w-100 p-2" style="white-space:nowrap">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="icon-sm mr-1">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -224,7 +229,7 @@
                                     @if (home_base_price($product) != home_discounted_base_price($product))
                                         <div class="disc-amount has-transition">
                                             <del
-                                                class="old-price text-decoration-line-through">{{ home_base_price($product) }}</del>
+                                                class="old-price text-decoration-line-through">{{$product->unit_price}}</del>
                                         </div>
                                     @endif
                                     <!-- price -->
@@ -526,7 +531,7 @@
                                     @if (home_base_price($product) != home_discounted_base_price($product))
                                         <div class="disc-amount has-transition">
                                             <del
-                                                class="old-price text-decoration-line-through">{{ home_base_price($product) }}</del>
+                                                class="old-price text-decoration-line-through">{{$product->unit_price}}</del>
                                         </div>
                                     @endif
                                     <!-- price -->
@@ -715,48 +720,28 @@
             </div>
              <!-- Top Brands -->
              @if (get_setting('top_brands') != null)
-                    <section class="mb-2 mb-md-3 mt-2 mt-md-3">
-                        <div class="container">
-                            <!-- Top Section -->
-                            <div class="d-flex mb-2 mb-md-3 align-items-baseline justify-content-between">
-                                <!-- Title -->
-                                <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0">Thương hiệu nổi bật</h3>
-                                <!-- Links -->
-                                <div class="d-flex">
-                                    <a class="text-blue fs-10 fs-md-12 fw-700 hov-text-primary animate-underline-primary"
-                                        href="{{ route('brands.all') }}">{{ translate('View All Brands') }}</a>
+                    <swiper-container class="top-brand-container  pt-2" init="true" loop="true" autoplay="true">
+                        @foreach ($brands as $brand)
+                            <swiper-slide class="pb-4">
+                                <div class="col py-2  text-center  hov-scale-img has-transition hov-shadow-out z-1"
+                                    style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;border-radius:15px;">
+                                    <a href="{{ route('products.brand', $brand->slug) }}" class="d-block p-sm-2">
+                                        <img src="{{ isset($brand->brandLogo->file_name) ? my_asset($brand->brandLogo->file_name) : static_asset('assets/img/placeholder.jpg') }}"
+                                            class="lazyload h-80px h-md-50px  mx-auto has-transition p-2 mw-100"
+                                            alt="{{ $brand->getTranslation('name') }}"
+                                            onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">
+                                        <p class="text-center text-dark fs-11  fw-700">
+                                            {{ $brand->getTranslation('name') }}
+                                        </p>
+                                    </a>
                                 </div>
-                            </div>
-                            <!-- Brands Section -->
-                            <div class="bg-white px-3">
-                                <div
-                                    class="row row-cols-xxl-6 row-cols-xl-6 row-cols-lg-4 row-cols-md-4 row-cols-3 gutters-16 border-top border-left">
-                                    @php
-                                        $top_brands = json_decode(get_setting('top_brands'));
-                                        $brands = get_brands($top_brands);
-                                    @endphp
-                                    @foreach ($brands as $brand)
-                                        <div
-                                            class="col text-center border-right border-bottom hov-scale-img has-transition hov-shadow-out z-1">
-                                            <a href="{{ route('products.brand', $brand->slug) }}"
-                                                class="d-block p-sm-3">
-                                                <img src="{{ isset($brand->brandLogo->file_name) ? my_asset($brand->brandLogo->file_name) : static_asset('assets/img/placeholder.jpg') }}"
-                                                    class="lazyload h-md-100px mx-auto has-transition p-2 p-sm-4 mw-100"
-                                                    alt="{{ $brand->getTranslation('name') }}"
-                                                    onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">
-                                                <p class="text-center text-dark fs-12 fs-md-14 fw-700 mt-2">
-                                                    {{ $brand->getTranslation('name') }}
-                                                </p>
-                                            </a>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                            </swiper-slide>
+                        @endforeach
+                    </swiper-container>
                 @endif
 
         </div>    
+   
     <!-- Flash Deal -->
     <!-- @php
         $flash_deal = get_featured_flash_deal();

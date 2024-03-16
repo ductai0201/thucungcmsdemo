@@ -27,9 +27,9 @@
     @endif
 
     <!-- Top Bar -->
-    <div class="top-navbar bg-white z-1035 h-35px h-sm-auto">
+    <div class="top-navbar bg-white z-1035 h-35px h-sm-auto container">
         <div class="container">
-            <div class="row d-flex justify-content-between">
+            <div class=" d-flex justify-content-between">
                 <ul
                     class="serviceTop--left list-inline d-flex justify-content-between align-item-center justify-content-lg-start mb-0">
                     <!-- Currency Switcher -->
@@ -143,9 +143,9 @@
         </div>
     </div>
 
-    <header class="@if (get_setting('header_stikcy') == 'on') sticky-top @endif z-1020 bg-white">
+    <header class="@if (get_setting('header_stikcy') == 'on') sticky-top @endif z-1020 bg-white container">
         <!-- Search Bar -->
-        <div class="position-relative logo-bar-area border-bottom border-md-nonea z-1025">
+        <div class="position-relative logo-bar-area border-md-nonea z-1025">
             <div class="container">
                 <div class="d-flex align-items-center">
                     <!-- top menu sidebar button -->
@@ -245,26 +245,39 @@
                                             <button class="btn px-2" type="button"><i
                                                     class="la la-2x la-long-arrow-left"></i></button>
                                         </div>
-                                        <div class="search-input-box">
-                                            <input type="text"
-                                                class="border border-soft-light form-control fs-14 hov-animate-outline"
-                                                id="search" name="keyword"
-                                                @isset($query)
-                                                value="{{ $query }}"
-                                            @endisset
-                                                placeholder="{{ translate('Tìm từ khóa...') }}"
-                                                autocomplete="off">
+                                        <div class="search-input-box d-flex rounded-2 search-wrapper gap-2">
+                                            <!-- dropdown -->
+                                           <div class="flex-grow-1 d-flex align-items-center bg-white rounded-search">
+                                                <div class="dropdown mr-2">
+                                                    <button class="btn dropdown-toggle dropdown-btn px-1 py-1 accordion d-flex align-items-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Tất cả
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" href="#">Sản phẩm</a>
+                                                        <a class="dropdown-item" href="#">Dịch vụ</a>
+                                                    </div>
+                                                </div>
+                                                <input type="text"
+                                                    class="fs-14 f-15 search-input rounded-3"
+                                                    id="search" name="keyword"
+                                                    @isset($query)
+                                                    value="{{ $query }}"
+                                                @endisset
+                                                    placeholder="{{ translate('Tìm từ khóa...') }}"
+                                                    autocomplete="off">
+                                           </div>
 
-                                            <svg id="Group_723" data-name="Group 723"
-                                                xmlns="http://www.w3.org/2000/svg" width="20.001" height="20"
-                                                viewBox="0 0 20.001 20">
-                                                <path id="Path_3090" data-name="Path 3090"
-                                                    d="M9.847,17.839a7.993,7.993,0,1,1,7.993-7.993A8,8,0,0,1,9.847,17.839Zm0-14.387a6.394,6.394,0,1,0,6.394,6.394A6.4,6.4,0,0,0,9.847,3.453Z"
-                                                    transform="translate(-1.854 -1.854)" fill="#b5b5bf" />
-                                                <path id="Path_3091" data-name="Path 3091"
-                                                    d="M24.4,25.2a.8.8,0,0,1-.565-.234l-6.15-6.15a.8.8,0,0,1,1.13-1.13l6.15,6.15A.8.8,0,0,1,24.4,25.2Z"
-                                                    transform="translate(-5.2 -5.2)" fill="#b5b5bf" />
-                                            </svg>
+                                           <div class="position-relative search-btn d-flex align-items-center justify-content-center">
+                                                <svg id="Group_723" data-name="Group 723" class="position-relative text-white"
+                                                    xmlns="http://www.w3.org/2000/svg" width="20.001" height="20"viewBox="0 0 20.001 20" fill="currentColor">
+                                                    <path id="Path_3090" data-name="Path 3090"
+                                                        d="M9.847,17.839a7.993,7.993,0,1,1,7.993-7.993A8,8,0,0,1,9.847,17.839Zm0-14.387a6.394,6.394,0,1,0,6.394,6.394A6.4,6.4,0,0,0,9.847,3.453Z"
+                                                        transform="translate(-1.854 -1.854)" fill="currentColor" />
+                                                    <path id="Path_3091" data-name="Path 3091"
+                                                        d="M24.4,25.2a.8.8,0,0,1-.565-.234l-6.15-6.15a.8.8,0,0,1,1.13-1.13l6.15,6.15A.8.8,0,0,1,24.4,25.2Z"
+                                                        transform="translate(-5.2 -5.2)" fill="currentColor" />
+                                                </svg>
+                                           </div>
                                         </div>
                                     </div>
                                 </form>
@@ -306,8 +319,10 @@
                         </div> --}}
 
                         <a href="{{ route('purchase_history.index') }}"
-                            class="trackingOrder menuRightHeader d-flex flex-column justify-content-center align-items-center">
-                            <img class="iconNavRight" src="{{ static_asset('assets/img/iconDonHang.svg') }}"
+                            class="trackingOrder menuRightHeader d-flex flex-column justify-content-center align-items-center item-hover">
+                            <img class="iconNavRight hidden-list-icon" src="{{ static_asset('assets/img/iconDonHang.svg') }}"
+                                alt="">
+                            <img class="iconNavRight red-list-icon" src="{{ static_asset('assets/img/iconDonHangDo.svg') }}"
                                 alt="">
                             <span class="textNavRight">Đơn hàng</span>
                         </a>
@@ -315,21 +330,23 @@
                             <!-- Notifications -->
                             <ul class="list-inline mb-0 h-100 d-none d-xl-flex justify-content-end align-items-center">
                                 <li class="list-inline-item  pl-0 dropdown">
-                                    <a class="menuRightHeader dropdown-toggle no-arrow  d-flex flex-column justify-content-center align-items-center"
-                                        data-toggle="dropdown" href="javascript:void(0);" role="button"
-                                        aria-haspopup="false" aria-expanded="false">
+                                        <a class="notify menuRightHeader dropdown-toggle no-arrow  d-flex flex-column justify-content-center align-items-center"
+                                            data-toggle="dropdown" href="javascript:void(0);" role="button"
+                                            aria-haspopup="false" aria-expanded="false">
 
-                                        <span class="position-relative d-inline-block">
+                                            <span class="position-relative d-inline-block">
 
-                                            <img src="{{ static_asset('assets/img/iconThongBao.svg') }}"
-                                                alt="">
-                                            @if (Auth::check() && count($user->unreadNotifications) > 0)
-                                                <span
-                                                    class="badge badge-primary badge-inline badge-pill absolute-top-right--10px">{{ count($user->unreadNotifications) }}</span>
-                                            @endif
-                                        </span>
-                                        <span class="textNavRight">Thông báo</span>
-                                    </a>
+                                                <img class="hidden-notify-icon" src="{{ static_asset('assets/img/iconThongBao.svg') }}"
+                                                    alt="">
+                                                <img class="red-notify-icon" src="{{ static_asset('assets/img/iconThongBaoDo.svg') }}"
+                                                    alt="">
+                                                @if (Auth::check() && count($user->unreadNotifications) > 0)
+                                                    <span
+                                                        class="badge badge-primary badge-inline badge-pill absolute-top-right--10px">{{ count($user->unreadNotifications) }}</span>
+                                                @endif
+                                            </span>
+                                            <span class="textNavRight">Thông báo</span>
+                                        </a>
 
                                     @auth
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg py-0 rounded-0">
@@ -415,9 +432,9 @@
                                 </span>
                             @else
                                 <!--Login & Registration -->
-                                <a href="{{ route('user.login') }}">
-                            
-                            
+                                <a href="{{ route('user.login') }}" class="account-nav">
+
+
                                 <span
                                     class="menuRightHeader d-flex flex-column justify-content-center align-items-center nav-user-info">
                                     <!-- Image -->
@@ -429,8 +446,10 @@
                                                     d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1.006,1.006,0,1,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1,10,10,0,0,0-6.25-8.19ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z"
                                                     transform="translate(-2.064 -1.995)" fill="#91919b" />
                                             </svg> -->
-                                        <img id="fe2df171891038b33e9624c27e96e367"
+                                        <img id="fe2df171891038b33e9624c27e96e367" class="hidden-account-icon"
                                             src="{{ static_asset('assets/img/iconTaiKhoan.png') }}" alt="">
+                                        <img id="fe2df171891038b33e9624c27e96e367" class="red-account-icon"
+                                            src="{{ static_asset('assets/img/iconTaiKhoanDo.svg') }}" alt="">
                                     </span>
                                     <span class="textNavRight">Tài khoản</span>
 
@@ -643,7 +662,7 @@
 
         <!-- Menu Bar -->
         <div class="d-none d-lg-block position-relative bg-white h-50px">
-            <div class="container h-100">
+            <div class="container h-100 ">
                 <div class="d-flex h-100">
                     <!-- <div class="d-flex h-100"> -->
                     <!-- Categoty Menu Button -->
@@ -686,14 +705,14 @@
                                 ? 'text-dark'
                                 : 'text-white';
                     @endphp
-                    <div class="ml-xl-4 w-100 overflow-hidden">
-                        <div class="d-flex align-items-center justify-content-center justify-content-xl-start h-100">
-                            <ul class="list-inline mb-0 pl-0 hor-swipe c-scrollbar-light">
+                    <div class="w-100 overflow-hidden">
+                        <div class="d-flex align-items-center justify-content-center justify-content-xl-start h-100 border-bottom">
+                            <ul class="list-inline mb-0 pl-0 hor-swipe c-scrollbar-light w-100 d-flex justify-content-between ">
                                 @if (get_setting('header_menu_labels') != null)
                                     @foreach (json_decode(get_setting('header_menu_labels'), true) as $key => $value)
                                         <li class="list-inline-item mr-0 animate-underline-white">
                                             <a href="{{ json_decode(get_setting('header_menu_links'), true)[$key] }}"
-                                                class="fs-14 px-3 py-3 d-inline-block fw-500 {{ $nav_txt_color }} header_menu_links hov-bg-black-10
+                                                class="fs-14 py-3 d-inline-block fw-500 {{ $nav_txt_color }} header_menu_links
                                             @if (url()->current() == json_decode(get_setting('header_menu_links'), true)[$key]) active @endif">
                                                 {{ translate($value) }}
                                             </a>

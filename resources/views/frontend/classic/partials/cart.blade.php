@@ -9,9 +9,11 @@
     }
 @endphp
 <!-- Cart button with cart count -->
-<a href="javascript:void(0)" class="d-flex flex-column menuRightHeader align-items-center text-dark" data-toggle="dropdown" data-display="static" title="{{translate('Cart')}}">
+<a href="javascript:void(0)" class="cart-nav d-flex flex-column menuRightHeader align-items-center text-dark" data-toggle="dropdown" data-display="static" title="{{translate('Cart')}}">
     <span class="mr-2">
-    <img class="iconNavRight" src="{{ static_asset('assets/img/iconGioHang.svg') }}" alt="">
+    <img class="iconNavRight hidden-card-icon" src="{{ static_asset('assets/img/iconGioHang.svg') }}" alt="">
+    <img class="iconNavRight red-card-icon" src="{{ static_asset('assets/img/iconGioHangDo.svg') }}" alt="">
+    </span>
     </span>
     <span class="textNavRight">Giỏ hàng</span>
     <!-- <span class="d-none d-xl-block ml-2 fs-14 fw-700 ">{{ single_price($total) }}</span>
