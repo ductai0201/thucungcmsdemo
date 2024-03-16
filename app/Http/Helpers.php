@@ -2524,7 +2524,7 @@ if (!function_exists('count_review')) {
 if(!function_exists('get_all_products')){
     function get_all_products(){
         $product_query = Product::query();
-        return $product_query->isApprovedPublished()->orderBy('created_at', 'desc')->limit(15)->get();
+        return $product_query->isApprovedPublished()->orderBy('created_at', 'desc')->limit(24)->get();
     }
 }
 

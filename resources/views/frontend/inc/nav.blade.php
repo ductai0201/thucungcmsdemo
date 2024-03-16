@@ -207,7 +207,7 @@
 
                             </div>
                             <!-- Category Menus -->
-                            <div class="hover-category-menu position-absolute w-100 top-100 left-0 right-0 z-3 d-none"
+                            <div class="hover-category-menu list-hidden-animation position-absolute w-100 top-100 left-0 right-0 z-3 d-none"
                                 id="click-category-menu">
                                 <!-- <div class="container"> -->
                                 <div class="d-flex position-relative">

@@ -179,7 +179,7 @@
                     @php
                         $product_url = route('product', $product->slug);
                     @endphp
-                    <div class="featured__product-card hov-animate-outline position-relative  p-md-3 p-2   col-lg-2 col-md-3 col-6 d-flex flex-column  justify-content-between"
+                    <div class="featured__product-card product-hover position-relative  p-md-3 p-2   col-lg-2 col-md-3 col-6 d-flex flex-column  justify-content-between"
                         style="gap:15px">
                         @if (discount_in_percentage($product) > 0)
                             <div class="product__badge position-absolute start-0 translate-middle rounded px-2"
@@ -481,7 +481,7 @@
                     @php
                         $product_url = route('product', $product->slug);
                     @endphp
-                    <div class="featured__product-card  position-relative  p-md-3 p-2   col-lg-2 col-md-3 col-6 d-flex flex-column  justify-content-between"
+                    <div class="featured__product-card product-hover  position-relative  p-md-3 p-2   col-lg-2 col-md-3 col-6 d-flex flex-column  justify-content-between"
                         style="gap:15px">
                         @if (discount_in_percentage($product) > 0)
                             <div class="product__badge position-absolute start-0 translate-middle rounded px-2"
@@ -726,7 +726,7 @@
                     @php
                         $product_url = route('product', $product->slug);
                     @endphp
-                    <div class="featured__product-card hov-animate-outline position-relative  p-md-3 p-2   col-lg-2 col-md-3 col-6 d-flex flex-column justify-content-between"
+                    <div class="featured__product-card product-hover position-relative  p-md-3 p-2   col-lg-2 col-md-3 col-6 d-flex flex-column justify-content-between"
                         style="gap:15px">
                         @if (discount_in_percentage($product) > 0)
                             <div class="product__badge position-absolute start-0 translate-middle rounded px-2"
