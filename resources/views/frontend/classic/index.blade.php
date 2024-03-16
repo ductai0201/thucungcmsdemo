@@ -179,7 +179,7 @@
                     @php
                         $product_url = route('product', $product->slug);
                     @endphp
-                    <div class="featured__product-card position-relative  p-md-3 p-2   col-lg-2 col-md-3 col-6 d-flex flex-column border justify-content-between"
+                    <div class="featured__product-card hov-animate-outline position-relative  p-md-3 p-2   col-lg-2 col-md-3 col-6 d-flex flex-column  justify-content-between"
                         style="gap:15px">
                         @if (discount_in_percentage($product) > 0)
                             <div class="product__badge position-absolute start-0 translate-middle rounded px-2"
@@ -481,7 +481,7 @@
                     @php
                         $product_url = route('product', $product->slug);
                     @endphp
-                    <div class="featured__product-card position-relative  p-md-3 p-2   col-lg-2 col-md-3 col-6 d-flex flex-column border justify-content-between"
+                    <div class="featured__product-card  position-relative  p-md-3 p-2   col-lg-2 col-md-3 col-6 d-flex flex-column  justify-content-between"
                         style="gap:15px">
                         @if (discount_in_percentage($product) > 0)
                             <div class="product__badge position-absolute start-0 translate-middle rounded px-2"
@@ -718,10 +718,236 @@
                         </div>
                     </div>
             </div>
+
+
+            <div class="productList ">
+                <div class="row featured-product-list-product productListSlide product-sale-home-page ">
+                @foreach (get_all_products() as $product)
+                    @php
+                        $product_url = route('product', $product->slug);
+                    @endphp
+                    <div class="featured__product-card hov-animate-outline position-relative  p-md-3 p-2   col-lg-2 col-md-3 col-6 d-flex flex-column justify-content-between"
+                        style="gap:15px">
+                        @if (discount_in_percentage($product) > 0)
+                            <div class="product__badge position-absolute start-0 translate-middle rounded px-2"
+                                style="top: 10px; left: 10px;">
+                                <span class="fw-500 text-light">-{{ discount_in_percentage($product) }}%</span>
+                            </div>
+                        @endif
+
+                        <img class="lazyload mx-auto img-fit has-transition h-150px"
+                            src="{{ $product->thumbnail != null ? my_asset($product->thumbnail->file_name) : static_asset('assets/img/placeholder.jpg') }}"
+                            alt="{{ $product->getTranslation('name') }}" title="{{ $product->getTranslation('name') }}"
+                            onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">
+                        <div class="product__card-content d-flex flex-column">
+                            <a href="{{ $product_url }}" class="product__card-title text-dark">
+                                <h2 class="fs-14 fw-600 text-ellipsis-2">{{ $product->getTranslation('name') }}</h2>
+                            </a>
+                            @if (avg_start_rating($product->id) > 0)
+                                <div class="product-rating my-1 d-flex align-items-center mb-2">
+                                    <div class="star-icons d-flex align-items-center">
+                                        <img width="20px" src="{{ static_asset('assets/img/star.svg') }}"
+                                            alt="Star">
+                                    </div>
+                                    <div class="rating-count ml-1 text-sm font-semibold">
+                                        {{ avg_start_rating($product->id) }}
+                                    </div>
+                                    <div class="numberReviews ml-3  flex items-center gap-1 d-flex align-items-center"
+                                        style="gap:5px">
+                                        <img width="20px" src="{{ static_asset('assets/img/chat.svg') }}"
+                                            alt=""><span class="count__rate"> {{ count_review($product->id) }}
+                                            đánh
+                                            giá</span>
+                                    </div>
+
+                                </div>
+                            @else
+                                <div class="product-rating my-1 d-flex align-items-center mb-2">
+                                    <span class="text-danger">Chưa có đánh giá</span>
+                                </div>
+                            @endif
+
+                            <div class="price-and-cart d-flex flex-column justify-content-between mb-2">
+                                <div class="price-info text-gray-600 d-flex align-items-center gap-3 d-flex "
+                                    style="gap:10px;">
+                                    {{-- <span class="new-price text-red-600 font-bold text-[24px] inline-block">400.000đ</span>
+                                    <span class="old-price text-decoration-line-through">499.000đ</span> --}}
+
+                                    @if (home_base_price($product) != home_discounted_base_price($product))
+                                        <div class="disc-amount has-transition">
+                                            <del
+                                                class="old-price text-decoration-line-through">{{$product->unit_price}}</del>
+                                        </div>
+                                    @endif
+                                    <!-- price -->
+                                    <div class="">
+                                        <span
+                                            class="new-price text-red-600 font-bold  inline-block">{{ home_discounted_base_price($product) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cartContainerandOp d-flex align-items-center justify-content-between ">
+                                <a @if (in_array($product->id, $cart_added)) active @endif" href="javascript:void(0)"
+                                    @if (Auth::check()) onclick="showAddToCartModal({{ $product->id }})" @else onclick="showLoginModal()" @endif
+                                    class="cart-icon btn__add-to-cart  h-40px d-flex justify-content-center align-items-center">
+                                    <img src="{{ static_asset('assets/img/shopping-cart.svg') }}" alt="Shopping Cart">
+                                </a>
+                                <!-- add to cart -->
+
+                                <div class="wishlistContainer d-flex  align-items-center " style="gap:10px;">
+                                    <div class="wishlist-icon-container flex ">
+                                        <a href="javascript:void(0)" class="hov-svg-white"
+                                            onclick="addToWishList({{ $product->id }})" data-toggle="tooltip"
+                                            data-title="Thêm vào mục ưa thích" data-placement="left">
+                                            <img width="20px" class="w-5 h-5 transition transform hover:scale-110"
+                                                src="{{ static_asset('assets/img/heart 2.svg') }}" alt="Wishlist"
+                                                style="cursor: pointer;">
+                                        </a>
+                                    </div>
+                                    <div class="wishlist-icon-container flex">
+                                        <a href="javascript:void(0)" data-toggle="tooltip"
+                                            data-title="Thêm vào mục so sánh" data-placement="left"
+                                            onclick="addToCompare({{ $product->id }})">
+                                            <img width="20px" class=" transition transform hover:scale-110"
+                                                src="{{ static_asset('assets/img/chart.svg') }}" alt="Compare"
+                                                style="cursor: pointer;">
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+                {{-- -------------end list product --}}
+                <!-- Top Sellers -->
+                @if (get_setting('vendor_system_activation') == 1)
+                    @php
+                        $best_selers = get_best_sellers(5);
+                    @endphp
+                    @if (count($best_selers) > 0)
+                        <section class="mb-2 mb-md-3 mt-2 mt-md-3">
+                            <div class="container">
+                                <!-- Top Section -->
+                                <div class="d-flex mb-2 mb-md-3 align-items-baseline justify-content-between">
+                                    <!-- Title -->
+                                    <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0">
+                                        <span class="pb-3">{{ translate('Top Sellers') }}</span>
+                                    </h3>
+                                    <!-- Links -->
+                                    <div class="d-flex">
+                                        <a class="text-blue fs-10 fs-md-12 fw-700 hov-text-primary animate-underline-primary"
+                                            href="{{ route('sellers') }}">{{ translate('View All Sellers') }}</a>
+                                    </div>
+                                </div>
+                                <!-- Sellers Section -->
+                                <div class="aiz-carousel arrow-x-0 arrow-inactive-none" data-items="5" data-xxl-items="5"
+                                    data-xl-items="4" data-lg-items="3.4" data-md-items="2.5" data-sm-items="2"
+                                    data-xs-items="1.4" data-arrows="true" data-dots="false">
+                                    @foreach ($best_selers as $key => $seller)
+                                        @if ($seller->user != null)
+                                            <div
+                                                class="carousel-box h-100 position-relative text-center border-right border-top border-bottom @if ($key == 0) border-left @endif has-transition hov-animate-outline">
+                                                <div class="position-relative px-3"
+                                                    style="padding-top: 2rem; padding-bottom:2rem;">
+                                                    <!-- Shop logo & Verification Status -->
+                                                    <div class="position-relative mx-auto size-100px size-md-120px">
+                                                        <a href="{{ route('shop.visit', $seller->slug) }}"
+                                                            class="d-flex mx-auto justify-content-center align-item-center size-100px size-md-120px border overflow-hidden hov-scale-img"
+                                                            tabindex="0"
+                                                            style="border: 1px solid #e5e5e5; border-radius: 50%; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.06);">
+                                                            <img src="{{ static_asset('assets/img/placeholder-rect.jpg') }}"
+                                                                data-src="{{ uploaded_asset($seller->logo) }}"
+                                                                alt="{{ $seller->name }}"
+                                                                class="img-fit lazyload has-transition"
+                                                                onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';">
+                                                        </a>
+                                                        <div
+                                                            class="absolute-top-right z-1 mr-md-2 mt-1 rounded-content bg-white">
+                                                            @if ($seller->verification_status == 1)
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24.001"
+                                                                    height="24" viewBox="0 0 24.001 24">
+                                                                    <g id="Group_25929" data-name="Group 25929"
+                                                                        transform="translate(-480 -345)">
+                                                                        <circle id="Ellipse_637" data-name="Ellipse 637"
+                                                                            cx="12" cy="12" r="12"
+                                                                            transform="translate(480 345)"
+                                                                            fill="#fff" />
+                                                                        <g id="Group_25927" data-name="Group 25927"
+                                                                            transform="translate(480 345)">
+                                                                            <path id="Union_5" data-name="Union 5"
+                                                                                d="M0,12A12,12,0,1,1,12,24,12,12,0,0,1,0,12Zm1.2,0A10.8,10.8,0,1,0,12,1.2,10.812,10.812,0,0,0,1.2,12Zm1.2,0A9.6,9.6,0,1,1,12,21.6,9.611,9.611,0,0,1,2.4,12Zm5.115-1.244a1.083,1.083,0,0,0,0,1.529l3.059,3.059a1.081,1.081,0,0,0,1.529,0l5.1-5.1a1.084,1.084,0,0,0,0-1.53,1.081,1.081,0,0,0-1.529,0L11.339,13.05,9.045,10.756a1.082,1.082,0,0,0-1.53,0Z"
+                                                                                transform="translate(0 0)"
+                                                                                fill="#3490f3" />
+                                                                        </g>
+                                                                    </g>
+                                                                </svg>
+                                                            @else
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24.001"
+                                                                    height="24" viewBox="0 0 24.001 24">
+                                                                    <g id="Group_25929" data-name="Group 25929"
+                                                                        transform="translate(-480 -345)">
+                                                                        <circle id="Ellipse_637" data-name="Ellipse 637"
+                                                                            cx="12" cy="12" r="12"
+                                                                            transform="translate(480 345)"
+                                                                            fill="#fff" />
+                                                                        <g id="Group_25927" data-name="Group 25927"
+                                                                            transform="translate(480 345)">
+                                                                            <path id="Union_5" data-name="Union 5"
+                                                                                d="M0,12A12,12,0,1,1,12,24,12,12,0,0,1,0,12Zm1.2,0A10.8,10.8,0,1,0,12,1.2,10.812,10.812,0,0,0,1.2,12Zm1.2,0A9.6,9.6,0,1,1,12,21.6,9.611,9.611,0,0,1,2.4,12Zm5.115-1.244a1.083,1.083,0,0,0,0,1.529l3.059,3.059a1.081,1.081,0,0,0,1.529,0l5.1-5.1a1.084,1.084,0,0,0,0-1.53,1.081,1.081,0,0,0-1.529,0L11.339,13.05,9.045,10.756a1.082,1.082,0,0,0-1.53,0Z"
+                                                                                transform="translate(0 0)"
+                                                                                fill="red" />
+                                                                        </g>
+                                                                    </g>
+                                                                </svg>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <!-- Shop name -->
+                                                    <h2
+                                                        class="fs-14 fw-700 text-dark text-truncate-2 h-40px mt-3 mt-md-4 mb-0 mb-md-3">
+                                                        <a href="{{ route('shop.visit', $seller->slug) }}"
+                                                            class="text-reset hov-text-primary"
+                                                            tabindex="0">{{ $seller->name }}</a>
+                                                    </h2>
+                                                    <!-- Shop Rating -->
+                                                    <div class="rating rating-mr-1 text-dark mb-3">
+                                                        {{ renderStarRating($seller->rating) }}
+                                                        <span class="opacity-60 fs-14">({{ $seller->num_of_reviews }}
+                                                            {{ translate('Reviews') }})</span>
+                                                    </div>
+                                                    <!-- Visit Button -->
+                                                    <a href="{{ route('shop.visit', $seller->slug) }}"
+                                                        class="btn-visit">
+                                                        <span class="circle" aria-hidden="true">
+                                                            <span class="icon arrow"></span>
+                                                        </span>
+                                                        <span class="button-text">{{ translate('Visit Store') }}</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                        </section>
+                    @endif
+                @endif
+
+               
+            </div>
+        </div>
              <!-- Top Brands -->
-             @if (get_setting('top_brands') != null)
+             <!-- @if (get_setting('top_brands') != null)
+                        @php
+                            $top_brands = json_decode(get_setting('top_brands'));
+                            $brands = get_brands($top_brands);
+                        @endphp 
                     <swiper-container class="top-brand-container  pt-2" init="true" loop="true" autoplay="true">
-                        @foreach ($brands as $brand)
+                    @foreach ($brands as $brand)
+                        
                             <swiper-slide class="pb-4">
                                 <div class="col py-2  text-center  hov-scale-img has-transition hov-shadow-out z-1"
                                     style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;border-radius:15px;">
@@ -738,7 +964,7 @@
                             </swiper-slide>
                         @endforeach
                     </swiper-container>
-                @endif
+                @endif -->
 
         </div>    
    

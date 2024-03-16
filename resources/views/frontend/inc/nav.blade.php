@@ -707,7 +707,7 @@
                     @endphp
                     <div class="w-100 overflow-hidden">
                         <div class="d-flex align-items-center justify-content-center justify-content-xl-start h-100 border-bottom">
-                            <ul class="list-inline mb-0 pl-0 hor-swipe c-scrollbar-light w-100 d-flex justify-content-between ">
+                            <ul class="menuMainNav list-inline mb-0 pl-0 hor-swipe c-scrollbar-light w-100 d-flex justify-content-between ">
                                 @if (get_setting('header_menu_labels') != null)
                                     @foreach (json_decode(get_setting('header_menu_labels'), true) as $key => $value)
                                         <li class="list-inline-item mr-0 animate-underline-white">

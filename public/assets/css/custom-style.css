@@ -202,6 +202,9 @@ li{
     font-size: 14px;
     font-weight: 500;
 }
+.product__card-title h2:hover{
+  color:var(--primary-color)!important;
+}
 
 .rating-count {
     font-size: 12px;
@@ -254,8 +257,9 @@ li{
     padding: 3px 8px;
     text-align: center;
 }
-.featured__product-card{
-  border-right: 1px solid var(--fifteen);
+.featured__product-card:hover{
+  /* border-right: 1px solid var(--fifteen); */
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 .container-bannerSlideAds{
   margin-top: 32px;
@@ -566,3 +570,8 @@ background-color:none;
 .bg-black-10, .hov-bg-black-10:hover{
   background-color: #ffffff!important;
 }
+.menuMainNav li:hover a{
+  color: var(--primary-color)!important;
+}
+
+
