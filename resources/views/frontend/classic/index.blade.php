@@ -27,10 +27,10 @@
                         <div class="row d-flex flex-nowrap h-280px mt-4">
                             <!-- Sliders -->
                                 @if (get_setting('home_slider_images', null, $lang) != null)
-                                        <!-- <swiper-container class="mySwiper col-8" pagination="true" pagination-clickable="true" navigation="true"
+                                         <!-- <swiper-container class="mySwiper col-8" pagination="true" pagination-clickable="true" navigation="true"
                                             space-between="30" centered-slides="true" autoplay-delay="2500"
-                                            autoplay-disable-on-interaction="false"> -->
-                                            <div class="banner-main-slider col-8 w-100">
+                                            autoplay-disable-on-interaction="false">  -->
+                                            <div class="banner-main-slider  col-8 w-100">
                                                     @foreach ($sliders as $key => $slider)
                                                         <!-- <swiper-slide> -->
                                                     <img class="sliderBannerPrimary d-block rounded-xl mw-100 w-100 img-fit h-280px"
@@ -38,10 +38,10 @@
                                                     alt="{{ env('APP_NAME') }} promo"
                                                     onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';">
                                                     
-                                                    <!-- </swiper-slide> -->
+                                                     <!-- </swiper-slide>  -->
                                                     @endforeach
                                             </div> 
-                                        <!-- </swiper-container> -->
+                                         <!-- </swiper-container>  -->
                                 @endif
                                <!-- One day product -->
                     @php $oneday_product = get_todays_product(); @endphp
@@ -73,10 +73,11 @@
                                 <div class="oneday_product__onday-rate d-flex align-items-center justify-content-between">
                                     <div class="start__count d-flex align-items-center ">
                                         <img class="icon-xs" src="{{ static_asset('assets/img/star.svg') }}" alt="">
-                                        <span class="fs-12 fw-700">{{  avg_start_rating($oneday_product->id) }}</span>
+                                        <span class="rating-count fs-12 fw-700">{{  avg_start_rating($oneday_product->id) }}</span>
                                     </div>
                                     <span class="fs-12 fw-500 ml-2"> {{ count_review($oneday_product->id) }} đánh giá</span>
-                                        đánh giá</span>
+                                    
+                                      
                                 </div>
                             @else
                                 <div class="product-rating my-1 d-flex align-items-center mb-2">
@@ -114,7 +115,8 @@
                 <div class="categoryBodyContainer text-center">
             <h2 class="categoryBodyContainer--title font-weight-bold">Danh mục của chúng tôi</h2>
             <div class="aiz-category-menu bg-white rounded-0 " id="category-sidebar" >
-                    <ul class="category-section d-flex justify-content-center">
+                
+                    <ul class="category-section d-flex justify-content-center slideCategory">
                         @foreach (get_level_zero_categories()->take(10) as $key => $category)
                             @php
                                 $category_name = $category->getTranslation('name');
